@@ -1,0 +1,21 @@
+{
+    "name": "C++ Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cmake-format",
+                "ms-vsliveshare.vsliveshare"
+            ]
+        }
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "forwardPorts": [],
+    "postCreateCommand": "cmake -S . -B build"
+}
