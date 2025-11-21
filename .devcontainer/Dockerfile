@@ -16,5 +16,8 @@ RUN apt-get update && \
         nano \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install Python dependencies required by the tests
+RUN python3 -m pip install --no-cache-dir numpy seaborn matplotlib
+
 # Set default workdir
 WORKDIR /workspace
