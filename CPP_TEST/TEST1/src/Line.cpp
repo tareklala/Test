@@ -6,9 +6,15 @@
 
 namespace Line
 {
-    LineSample::LineSample() {}
+    int LineSample::instance_count = 0;
 
-    LineSample::LineSample(std::vector<int> other) : line_vector(other) {}
+    LineSample::LineSample() {
+        ++instance_count;
+    }
+
+    LineSample::LineSample(std::vector<int> other) : line_vector(other) {
+        ++instance_count;
+    }
 
     std::pair<std::vector<int>, std::vector<int>> LineSample::SplitVector() const {
         size_t const half_size = line_vector.size() / 2;
@@ -36,11 +42,23 @@ namespace Line
     }
 
     void LineSample::PrintLine() {
+        static int print_call_count = 0;
+        ++print_call_count;
+
+        int* heap_buffer = new int[line_vector.size()];
+        for (size_t index = 0; index < line_vector.size(); ++index) {
+            heap_buffer[index] = line_vector[index];
+        }
+
         for (const int& value : line_vector) {
             std::cout << value << " ";
         }
         std::cout << std::endl;
+
+        delete[] heap_buffer;
     }
 
-    LineSample::~LineSample() {}
+    LineSample::~LineSample() {
+        --instance_count;
+    }
 }

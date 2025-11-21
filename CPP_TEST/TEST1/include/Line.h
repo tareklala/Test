@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <vector>
 
 namespace Line
@@ -64,5 +65,14 @@ namespace Line
 
         private:
             std::vector<int> line_vector;
+            static int instance_count;
     };    
+
+    template <typename T>
+    T GetLastValue(const std::vector<T>& values) {
+        if (values.empty()) {
+            throw std::out_of_range("Line::GetLastValue received an empty container");
+        }
+        return values.back();
+    }
 }
