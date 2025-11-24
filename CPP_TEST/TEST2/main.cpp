@@ -38,12 +38,20 @@ public:
     // Solve method: Use Greedy Algorithm or other algorithms to solve the problem
     void solve() override {
         
-        remainingAmount = amount;
-        for(int i = denominations.size()-1; i >= 0; i--) {
-            coinsCount.push_back(remainingAmount/denominations[i]);
-            remainingAmount = remainingAmount % denominations[i];
+        int count = 0;
+
+        std::sort(denominations.rbegin(), denominations.rend()); // Sort coins in descending order
+
+        int remainingAmount = amount;
+        for (int coin : denominations) { // For loop
+            while (remainingAmount >= coin) { // While loop
+                remainingAmount -= coin;
+                count++;
+                 // Add coin to the result
+            }
+            coinsCount.push_back(count);
+            count = 0;
         }
-                    
  
     }
 
